@@ -25,9 +25,11 @@ const anotherElement = (
     <a href="https://google.com" target='_blank'>Visit google</a>
 )
 
+const anotherUser = 'chai aur code'
+
 const reactElement = (
   <a href="https://google.com" target="_blank">
-    Click me to visit google
+    Click me to visit google {anotherUser}
   </a>
 )
 
