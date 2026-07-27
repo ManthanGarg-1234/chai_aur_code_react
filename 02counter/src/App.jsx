@@ -19,7 +19,11 @@ function App() {
   }
 
   const removeValue = () => {
-    setCounter(counter - 1)
+    // setCounter(counter - 1)
+    
+    // by below line negative count not ocmes
+    setCounter((currentCounter) => Math.max(currentCounter - 1, 0))
+
   }
 
   return (
