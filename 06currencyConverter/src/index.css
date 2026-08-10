@@ -1,0 +1,645 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family: "Inter", Arial, sans-serif;
+}
+
+/* ================================================= */
+/* MAIN BACKGROUND */
+/* ================================================= */
+
+.currency-app {
+    position: relative;
+
+    min-height: 100vh;
+    width: 100%;
+
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            rgba(5, 8, 55, 0.72),
+            rgba(5, 8, 55, 0.72)
+        ),
+        url("https://images.pexels.com/photos/3532540/pexels-photo-3532540.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* ================================================= */
+/* DARK OVERLAY */
+/* ================================================= */
+
+.background-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(39, 73, 190, 0.25),
+            transparent 55%
+        );
+
+    pointer-events: none;
+}
+
+/* ================================================= */
+/* MARKET GRAPH LINES */
+/* ================================================= */
+
+.market-line {
+    position: absolute;
+
+    width: 800px;
+    height: 250px;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    opacity: 0.8;
+}
+
+.market-line-1 {
+    left: -280px;
+    bottom: 70px;
+
+    border-top: 2px solid rgba(0, 255, 120, 0.8);
+
+    transform: rotate(7deg);
+
+    box-shadow:
+        0 0 15px rgba(0, 255, 120, 0.4);
+}
+
+.market-line-2 {
+    right: -280px;
+    top: 180px;
+
+    border-top: 2px solid rgba(0, 200, 255, 0.8);
+
+    transform: rotate(-7deg);
+
+    box-shadow:
+        0 0 15px rgba(0, 200, 255, 0.4);
+}
+
+.market-line-3 {
+    right: 50px;
+    bottom: -130px;
+
+    width: 600px;
+
+    border-top: 2px solid rgba(0, 150, 255, 0.6);
+
+    transform: rotate(-15deg);
+}
+
+/* ================================================= */
+/* CHART BARS */
+/* ================================================= */
+
+.chart-bars {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 300px;
+
+    display: flex;
+    align-items: flex-end;
+
+    justify-content: space-around;
+
+    opacity: 0.35;
+
+    pointer-events: none;
+}
+
+.chart-bars div {
+    width: 5%;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0, 100, 255, 0.75),
+            rgba(0, 100, 255, 0.05)
+        );
+
+    border-top: 1px solid rgba(0, 180, 255, 0.8);
+}
+
+.chart-bars div:nth-child(1) {
+    height: 30%;
+}
+
+.chart-bars div:nth-child(2) {
+    height: 45%;
+}
+
+.chart-bars div:nth-child(3) {
+    height: 25%;
+}
+
+.chart-bars div:nth-child(4) {
+    height: 55%;
+}
+
+.chart-bars div:nth-child(5) {
+    height: 38%;
+}
+
+.chart-bars div:nth-child(6) {
+    height: 68%;
+}
+
+.chart-bars div:nth-child(7) {
+    height: 48%;
+}
+
+.chart-bars div:nth-child(8) {
+    height: 75%;
+}
+
+.chart-bars div:nth-child(9) {
+    height: 60%;
+}
+
+.chart-bars div:nth-child(10) {
+    height: 85%;
+}
+
+/* ================================================= */
+/* BACKGROUND TEXT */
+/* ================================================= */
+
+.percentage {
+    position: absolute;
+
+    font-size: 18px;
+
+    font-weight: 500;
+
+    opacity: 0.4;
+
+    pointer-events: none;
+}
+
+.percentage-1 {
+    left: 8%;
+    top: 42%;
+
+    color: #00ff9d;
+}
+
+.percentage-2 {
+    right: 9%;
+    top: 38%;
+
+    color: #ff3b7f;
+}
+
+.percentage-3 {
+    right: 8%;
+    bottom: 38%;
+
+    color: #00ff9d;
+}
+
+/* ================================================= */
+/* MAIN WRAPPER */
+/* ================================================= */
+
+.converter-wrapper {
+    position: relative;
+
+    z-index: 10;
+
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+
+    padding: 30px 20px;
+}
+
+/* ================================================= */
+/* GLASS CARD */
+/* ================================================= */
+
+.converter-card {
+    position: relative;
+
+    width: 755px;
+
+    padding: 33px;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.27),
+            rgba(255, 255, 255, 0.10)
+        );
+
+    border: 1px solid rgba(255, 255, 255, 0.65);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.35),
+        inset 0 1px 1px rgba(255, 255, 255, 0.25);
+}
+
+/* ================================================= */
+/* INPUT WRAPPER */
+/* ================================================= */
+
+.input-wrapper {
+    width: 100%;
+}
+
+.to-wrapper {
+    margin-top: 16px;
+}
+
+/* ================================================= */
+/* INPUT BOX */
+/* ================================================= */
+
+.currency-box {
+    width: 100%;
+
+    min-height: 142px;
+
+    padding: 22px 20px;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    background: rgba(255, 255, 255, 0.97);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ================================================= */
+/* AMOUNT SECTION */
+/* ================================================= */
+
+.amount-section {
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    gap: 28px;
+
+    min-width: 0;
+}
+
+.input-label {
+    color: #999;
+
+    font-size: 23px;
+
+    font-weight: 500;
+}
+
+.amount-input {
+    width: 430px;
+
+    max-width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #111;
+
+    font-size: 24px;
+
+    font-weight: 500;
+}
+
+.amount-input:disabled {
+    color: #111;
+
+    opacity: 1;
+}
+
+.amount-input::placeholder {
+    color: #111;
+
+    opacity: 1;
+}
+
+/* Remove number arrows */
+
+.amount-input::-webkit-inner-spin-button,
+.amount-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+
+    margin: 0;
+}
+
+.amount-input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* ================================================= */
+/* CURRENCY SECTION */
+/* ================================================= */
+
+.currency-section {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    gap: 16px;
+}
+
+.currency-label {
+    color: #999;
+
+    font-size: 23px;
+
+    font-weight: 500;
+
+    white-space: nowrap;
+}
+
+.currency-select {
+    width: 116px;
+
+    height: 48px;
+
+    padding: 0 12px;
+
+    border: none;
+
+    outline: none;
+
+    border-radius: 12px;
+
+    background: #f3f3f7;
+
+    color: #111;
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+.currency-select:focus {
+    outline: 2px solid #2864e7;
+}
+
+/* ================================================= */
+/* SWAP */
+/* ================================================= */
+
+.swap-container {
+    position: relative;
+
+    width: 100%;
+
+    height: 0;
+}
+
+.swap-button {
+    position: absolute;
+
+    left: 50%;
+
+    top: 0;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 20;
+
+    padding: 7px 14px;
+
+    border: 2px solid white;
+
+    border-radius: 7px;
+
+    background: #2864e7;
+
+    color: white;
+
+    font-size: 23px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.25);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.swap-button:hover {
+    background: #1d55cc;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1.05);
+}
+
+.swap-button:active {
+    transform:
+        translate(-50%, -50%)
+        scale(0.96);
+}
+
+/* ================================================= */
+/* CONVERT BUTTON */
+/* ================================================= */
+
+.convert-button {
+    width: 100%;
+
+    height: 80px;
+
+    margin-top: 27px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: #2864e7;
+
+    color: white;
+
+    font-size: 28px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(28, 86, 220, 0.3);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.convert-button:hover {
+    background: #1d55cc;
+
+    box-shadow:
+        0 10px 25px rgba(28, 86, 220, 0.4);
+}
+
+.convert-button:active {
+    transform: scale(0.99);
+}
+
+/* ================================================= */
+/* TABLET */
+/* ================================================= */
+
+@media (max-width: 800px) {
+
+    .converter-card {
+        width: 95vw;
+
+        padding: 25px;
+    }
+
+    .amount-input {
+        width: 300px;
+    }
+
+    .input-label,
+    .currency-label {
+        font-size: 20px;
+    }
+
+    .convert-button {
+        font-size: 23px;
+    }
+}
+
+/* ================================================= */
+/* MOBILE */
+/* ================================================= */
+
+@media (max-width: 600px) {
+
+    .converter-wrapper {
+        padding: 20px 10px;
+    }
+
+    .converter-card {
+        width: 100%;
+
+        padding: 15px;
+    }
+
+    .currency-box {
+        min-height: 125px;
+
+        padding: 17px 14px;
+    }
+
+    .amount-section {
+        gap: 20px;
+    }
+
+    .amount-input {
+        width: 150px;
+
+        font-size: 20px;
+    }
+
+    .input-label,
+    .currency-label {
+        font-size: 16px;
+    }
+
+    .currency-select {
+        width: 90px;
+
+        height: 43px;
+
+        font-size: 16px;
+    }
+
+    .convert-button {
+        height: 65px;
+
+        font-size: 18px;
+    }
+
+    .swap-button {
+        font-size: 18px;
+
+        padding: 6px 12px;
+    }
+
+    .percentage {
+        display: none;
+    }
+}
+
+/* ================================================= */
+/* SMALL MOBILE */
+/* ================================================= */
+
+@media (max-width: 400px) {
+
+    .amount-input {
+        width: 110px;
+    }
+
+    .currency-label {
+        font-size: 14px;
+    }
+
+    .currency-select {
+        width: 80px;
+    }
+}
