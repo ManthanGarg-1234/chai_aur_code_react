@@ -1,0 +1,4 @@
+@import "tailwindcss";
+
+/* इस लाइन को जोड़ते ही Tailwind v4 को समझ आ जाएगा कि html पर 'dark' क्लास देखनी है */
+@variant dark (&:where(.dark, .dark *));
