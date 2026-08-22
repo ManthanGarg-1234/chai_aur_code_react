@@ -19,31 +19,45 @@ export default function PostForm({ post }) {
     const userData = useSelector((state) => state.auth.userData);
 
     const submit = async (data) => {
+        // यहाँ हमने फिक्स किया है: data.image[0] से असली फ़ाइल ऑब्जेक्ट निकाला
+        const fileInput = data.image?.[0];
+
         if (post) {
-            const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null;
+            // अगर पहले से पोस्ट है और नई इमेज सेलेक्ट की है, तो उसे अपलोड करें
+            const file = fileInput ? await appwriteService.uploadFile(fileInput) : null;
 
             if (file) {
-                appwriteService.deleteFile(post.featuredImage);
+                // पुरानी इमेज डिलीट करें
+                await appwriteService.deleteFile(post.featuredImage);
             }
 
             const dbPost = await appwriteService.updatePost(post.$id, {
                 ...data,
-                featuredImage: file ? file.$id : undefined,
+                featuredImage: file ? file.$id : post.featuredImage,
             });
 
             if (dbPost) {
                 navigate(`/post/${dbPost.$id}`);
             }
         } else {
-            const file = await appwriteService.uploadFile(data.image[0]);
+            // नया पोस्ट बनाते समय इमेज अपलोड करना ज़रूरी है
+            if (fileInput) {
+                const file = await appwriteService.uploadFile(fileInput);
 
-            if (file) {
-                const fileId = file.$id;
-                data.featuredImage = fileId;
-                const dbPost = await appwriteService.createPost({ ...data, userId: userData.$id });
+                if (file) {
+                    const fileId = file.$id;
+                    // पुराना 'data.image' एरे डिलीट करके 'featuredImage' सेट कर रहे हैं ताकि Appwrite क्रैश न हो
+                    delete data.image; 
+                    
+                    const dbPost = await appwriteService.createPost({ 
+                        ...data, 
+                        featuredImage: fileId, 
+                        userId: userData.$id 
+                    });
 
-                if (dbPost) {
-                    navigate(`/post/${dbPost.$id}`);
+                    if (dbPost) {
+                        navigate(`/post/${dbPost.$id}`);
+                    }
                 }
             }
         }
@@ -88,7 +102,13 @@ export default function PostForm({ post }) {
                         setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
                     }}
                 />
-                <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
+                <RTE 
+                    label="Content :" 
+                    name="content" 
+                    control={control} 
+                    defaultValue={getValues("content")} 
+                    apiKey="oa96r070ln4mdx5qx6shku2emv9o4lny7fun8pfjqspocsmz"
+                />
             </div>
             <div className="w-1/3 px-2">
                 <Input
